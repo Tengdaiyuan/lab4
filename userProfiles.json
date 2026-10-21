@@ -1,0 +1,78 @@
+[
+  {
+    "id": "u-1001",
+    "firstName": "Ava",
+    "lastName": "Thompson",
+    "email": "ava.thompson@example.com",
+    "dateOfBirth": "1994-03-18",
+    "address": {
+      "street": "412 Maple Grove Avenue",
+      "city": "Portland",
+      "state": "OR",
+      "zipCode": "97205"
+    },
+    "preferences": {
+      "theme": "dark",
+      "language": "en-US",
+      "notifications": true,
+      "subscription": true
+    }
+  },
+  {
+    "id": "u-1002",
+    "firstName": "Liam",
+    "lastName": "Okafor",
+    "email": "liam.okafor@example.com",
+    "dateOfBirth": "1988-11-02",
+    "address": {
+      "street": "77 Cedar Lane, Apt 5B",
+      "city": "Austin",
+      "state": "TX",
+      "zipCode": "73301"
+    },
+    "preferences": {
+      "theme": "light",
+      "language": "en-GB",
+      "notifications": false,
+      "subscription": false
+    }
+  },
+  {
+    "id": "u-1003",
+    "firstName": "Sofía",
+    "lastName": "Martínez",
+    "email": "sofia.martinez@example.com",
+    "dateOfBirth": "1999-07-25",
+    "address": {
+      "street": "Calle Mayor 18, 2º B",
+      "city": "Madrid",
+      "state": "Madrid",
+      "zipCode": "28013"
+    },
+    "preferences": {
+      "theme": "system",
+      "language": "es-ES",
+      "notifications": true,
+      "subscription": true
+    }
+  },
+  {
+    "id": "u-1004",
+    "firstName": "Noah",
+    "lastName": "Chen",
+    "email": "noah.chen@example.com",
+    "dateOfBirth": "2001-01-09",
+    "address": {
+      "street": "1288 Nathan Road, Unit 21C",
+      "city": "Kowloon",
+      "state": "Hong Kong",
+      "zipCode": "518000"
+    },
+    "preferences": {
+      "theme": "dark",
+      "language": "zh-CN",
+      "notifications": false,
+      "subscription": true
+    }
+  }
+]

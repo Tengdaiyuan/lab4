@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book catalogue (XML) — XML &amp; JSON Lab</title>
+  <meta name="description" content="book.xml fetched with the fetch API, parsed with DOMParser and displayed as cards and a table.">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    try {
+      var chosen = new URLSearchParams(location.search).get('theme');
+      if (chosen === 'dark' || chosen === 'light') localStorage.setItem('lab-theme', chosen);
+      else chosen = localStorage.getItem('lab-theme');
+      document.documentElement.setAttribute('data-theme', chosen === 'dark' ? 'dark' : 'light');
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">XML</span>
+        <span>XML &amp; JSON Lab<small>Web data formats · CST</small></span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Overview</a>
+        <a href="books.html">Books (XML)</a>
+        <a href="users.html">Profiles (JSON)</a>
+        <button type="button" id="theme-toggle">Light</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">Task 1 · XML</p>
+      <h1>Book catalogue</h1>
+      <p>
+        The page fetches <code>book.xml</code>, parses the text with
+        <code>new DOMParser().parseFromString(xmlText, 'text/xml')</code> and renders every
+        <code>&lt;book&gt;</code> element. Each book is identified by its <code>id</code> attribute
+        and carries <code>title</code>, <code>author</code> and <code>price</code> children.
+        <a href="book.xml" target="_blank" rel="noopener">View the raw XML</a>.
+      </p>
+    </div>
+
+    <div id="status" class="loading" role="status" aria-live="polite">Loading book.xml …</div>
+
+    <div class="toolbar" style="margin-top:1.25rem">
+      <div class="field">
+        <label for="search">Search</label>
+        <input id="search" type="search" placeholder="Title, author or id…" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="sort">Sort</label>
+        <select id="sort">
+          <option value="title-asc">Title A → Z</option>
+          <option value="author-asc">Author A → Z</option>
+          <option value="price-asc">Price low → high</option>
+          <option value="price-desc">Price high → low</option>
+        </select>
+      </div>
+      <div class="field" role="group" aria-label="View mode">
+        <button type="button" class="btn btn-primary" data-view="cards" aria-pressed="true">Cards</button>
+        <button type="button" class="btn btn-ghost" data-view="table" aria-pressed="false">Table</button>
+      </div>
+    </div>
+
+    <dl class="stats">
+      <div class="stat"><dt>Books</dt><dd id="stat-count">0</dd></div>
+      <div class="stat"><dt>Total value</dt><dd id="stat-total">–</dd></div>
+      <div class="stat"><dt>Average price</dt><dd id="stat-average">–</dd></div>
+      <div class="stat"><dt>Price range</dt><dd id="stat-range" style="font-size:1.05rem">–</dd></div>
+    </dl>
+
+    <div class="section-title">
+      <h2>Catalogue</h2>
+      <p>Source: <code>book.xml</code> · root element <code>&lt;catalogue&gt;</code></p>
+    </div>
+
+    <div id="book-cards" class="card-grid"></div>
+
+    <div id="book-table" class="table-shell hidden">
+      <table>
+        <caption class="hidden">Book catalogue parsed from book.xml</caption>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody id="book-rows"></tbody>
+      </table>
+    </div>
+
+    <p class="hint"><strong>Note:</strong> the XML is validated twice — by the browser parser
+      (a <code>&lt;parsererror&gt;</code> document is reported on the page) and offline by
+      <code>node tools/validate.mjs</code>.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>XML &amp; JSON Lab · static site, ready for GitHub Pages · © <span id="year">2026</span></span>
+      <span><a href="userProfiles.json">JSON lab data</a></span>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/books.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CST Lab 1 - XML: a simple book catalogue.
+  Every <book> carries a unique id attribute and the child elements
+  title, author and price.
+-->
+<catalogue>
+  <book id="bk101">
+    <title>The Pragmatic Programmer</title>
+    <author>Andrew Hunt</author>
+    <price>49.99</price>
+  </book>
+  <book id="bk102">
+    <title>Clean Code</title>
+    <author>Robert C. Martin</author>
+    <price>42.50</price>
+  </book>
+  <book id="bk103">
+    <title>Designing Data-Intensive Applications</title>
+    <author>Martin Kleppmann</author>
+    <price>54.75</price>
+  </book>
+  <book id="bk104">
+    <title>Introduction to Algorithms</title>
+    <author>Thomas H. Cormen</author>
+    <price>89.95</price>
+  </book>
+  <book id="bk105">
+    <title>Computer Networks</title>
+    <author>Andrew S. Tanenbaum</author>
+    <price>67.20</price>
+  </book>
+  <book id="bk106">
+    <title>The Art of Computer Programming</title>
+    <author>Donald E. Knuth</author>
+    <price>119.00</price>
+  </book>
+</catalogue>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User profiles (JSON) — XML &amp; JSON Lab</title>
+  <meta name="description" content="userProfiles.json fetched with the fetch API and displayed as profile cards with addresses, preferences and subscription state.">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    try {
+      var chosen = new URLSearchParams(location.search).get('theme');
+      if (chosen === 'dark' || chosen === 'light') localStorage.setItem('lab-theme', chosen);
+      else chosen = localStorage.getItem('lab-theme');
+      document.documentElement.setAttribute('data-theme', chosen === 'dark' ? 'dark' : 'light');
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">XML</span>
+        <span>XML &amp; JSON Lab<small>Web data formats · CST</small></span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Overview</a>
+        <a href="books.html">Books (XML)</a>
+        <a href="users.html">Profiles (JSON)</a>
+        <button type="button" id="theme-toggle">Light</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">Task 2 · JSON</p>
+      <h1>User profiles</h1>
+      <p>
+        The page fetches <code>userProfiles.json</code> and renders each profile: name, e-mail,
+        date of birth, a nested <code>address</code> (street, city, state, zipCode) and the
+        <code>preferences</code> object including its <code>subscription</code> flag.
+        <a href="userProfiles.json" target="_blank" rel="noopener">View the raw JSON</a>.
+      </p>
+    </div>
+
+    <div id="status" class="loading" role="status" aria-live="polite">Loading userProfiles.json …</div>
+
+    <div class="toolbar" style="margin-top:1.25rem">
+      <div class="field">
+        <label for="search">Search</label>
+        <input id="search" type="search" placeholder="Name, e-mail, city…" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="subscription-filter">Newsletter</label>
+        <select id="subscription-filter">
+          <option value="all">All profiles</option>
+          <option value="yes">Subscribed only</option>
+          <option value="no">Not subscribed</option>
+        </select>
+      </div>
+    </div>
+
+    <dl class="stats">
+      <div class="stat"><dt>Profiles</dt><dd id="stat-users">0</dd></div>
+      <div class="stat"><dt>Subscribed</dt><dd id="stat-subscribed">0</dd></div>
+      <div class="stat"><dt>Notifications on</dt><dd id="stat-notify">0</dd></div>
+      <div class="stat"><dt>Languages</dt><dd id="stat-languages">0</dd></div>
+    </dl>
+
+    <div class="section-title">
+      <h2>Profiles</h2>
+      <p>Source: <code>userProfiles.json</code> · top-level array</p>
+    </div>
+
+    <div id="profile-grid" class="card-grid"></div>
+
+    <p class="hint"><strong>Note:</strong> the JSON is validated offline by
+      <code>node tools/validate.mjs</code>, which checks the required fields, the nested
+      <code>address</code> object and the boolean <code>subscription</code> flag for every profile.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>XML &amp; JSON Lab · static site, ready for GitHub Pages · © <span id="year">2026</span></span>
+      <span><a href="book.xml">XML lab data</a></span>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/users.js"></script>
+</body>
+</html>

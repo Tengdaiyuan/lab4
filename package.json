@@ -1,0 +1,16 @@
+{
+  "name": "xml-json-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Lab submission: XML book catalogue and JSON user profiles, fetched and rendered in the browser.",
+  "scripts": {
+    "serve": "node serve.mjs",
+    "validate": "node tools/validate.mjs",
+    "check": "node tools/validate.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

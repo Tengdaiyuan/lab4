@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>XML &amp; JSON Lab — Book Catalogue and User Profiles</title>
+  <meta name="description" content="Lab submission: an XML book catalogue and a JSON user-profile set, parsed in the browser with fetch and DOMParser.">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    // Apply the saved theme before first paint. ?theme=dark|light is shareable.
+    try {
+      var chosen = new URLSearchParams(location.search).get('theme');
+      if (chosen === 'dark' || chosen === 'light') localStorage.setItem('lab-theme', chosen);
+      else chosen = localStorage.getItem('lab-theme');
+      document.documentElement.setAttribute('data-theme', chosen === 'dark' ? 'dark' : 'light');
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">XML</span>
+        <span>XML &amp; JSON Lab<small>Web data formats · CST</small></span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Overview</a>
+        <a href="books.html">Books (XML)</a>
+        <a href="users.html">Profiles (JSON)</a>
+        <button type="button" id="theme-toggle">Light</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <p class="eyebrow">Lab 1 &amp; 2 · Submission</p>
+      <h1>Databases start with well-formed data.</h1>
+      <p class="lede">
+        This site holds both lab tasks. <strong>Task 1</strong> is an XML book catalogue
+        (<code>book.xml</code>); <strong>Task 2</strong> is a JSON set of user profiles
+        (<code>userProfiles.json</code>). Each page fetches its data file in the browser,
+        parses it with the <code>DOMParser</code> / <code>Response.json()</code> APIs from the
+        handout, and renders the records as cards and tables.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="books.html">Open the XML lab →</a>
+        <a class="btn btn-ghost" href="users.html">Open the JSON lab →</a>
+      </div>
+    </section>
+
+    <div class="section-title">
+      <h2>The two lab tasks</h2>
+      <p>Both pages work directly on GitHub Pages — no build step, no dependencies.</p>
+    </div>
+
+    <div class="card-grid">
+      <article class="card">
+        <h3>1 · XML first</h3>
+        <p>A catalogue of books. Every <code>&lt;book&gt;</code> has a unique <code>id</code> attribute
+          and exactly the child elements <code>&lt;title&gt;</code>, <code>&lt;author&gt;</code> and
+          <code>&lt;price&gt;</code>. It is served as <code>text/xml</code> and parsed with
+          <code>DOMParser</code>.</p>
+        <p style="margin-top:.9rem"><a class="btn btn-ghost" href="books.html">books.html</a>
+          <a class="btn btn-ghost" href="book.xml" target="_blank" rel="noopener">book.xml</a></p>
+      </article>
+
+      <article class="card">
+        <h3>2 · JSON second</h3>
+        <p>Four user profiles, each with <code>firstName</code>, <code>lastName</code>, <code>email</code>,
+          <code>dateOfBirth</code>, a nested <code>address</code> (street, city, state, zipCode) and
+          <code>preferences</code> (theme, language, notifications, subscription).</p>
+        <p style="margin-top:.9rem"><a class="btn btn-ghost" href="users.html">users.html</a>
+          <a class="btn btn-ghost" href="userProfiles.json" target="_blank" rel="noopener">userProfiles.json</a></p>
+      </article>
+
+      <article class="card">
+        <h3>3 · Validation</h3>
+        <p>The XML is checked for well-formedness by <code>tools/validate.mjs</code> (and by the
+          browser parser itself). The JSON is machine-validated for structure and required fields.
+          Both files also pass the online validators named in the handout.</p>
+      </article>
+    </div>
+
+    <div class="section-title">
+      <h2>How the data flow works</h2>
+      <p>The same three steps on both pages.</p>
+    </div>
+
+    <pre><code>// 1. fetch the data file that sits next to this page
+fetch('book.xml')
+  .then(response =&gt; {
+    if (!response.ok) throw new Error('Fetch error: ' + response.status)
+    return response.text()          // .json() for the JSON lab
+  })
+  // 2. parse it
+  .then(xmlText =&gt; {
+    const parser  = new DOMParser()
+    const xmlDoc  = parser.parseFromString(xmlText, 'text/xml')
+    const books   = xmlDoc.getElementsByTagName('book')
+  })
+  // 3. render it
+  .then(render)
+  .catch(err =&gt; console.error('Fetch error: ' + err.message))</code></pre>
+
+    <p class="hint"><strong>Running locally?</strong> Browsers block <code>fetch()</code> on
+      <code>file://</code> URLs (CORS), so open the folder through a tiny local server:
+      <code>npm run serve</code> (or <code>node serve.mjs</code>) and visit
+      <code>http://127.0.0.1:5173/</code>. On GitHub Pages the same files are served over HTTPS,
+      so the pages just work.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>XML &amp; JSON Lab · static site, ready for GitHub Pages · © <span id="year">2026</span></span>
+      <span><a href="https://github.com" target="_blank" rel="noopener">GitHub repository</a></span>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
