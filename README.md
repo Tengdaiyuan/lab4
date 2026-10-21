@@ -53,8 +53,7 @@ lab-xml-json/
 ├── tools/selftest.mjs    self-test proving the XML checker rejects broken documents
 ├── package.json          npm scripts: serve / validate
 ├── .nojekyll             tells GitHub Pages not to run Jekyll
-├── screenshots/          rendered captures of every page (light + dark)
-└── .github/workflows/pages.yml   optional GitHub Actions deployment
+└── screenshots/          rendered captures of every page (light + dark)
 ```
 
 ## 3. The two lab tasks
@@ -126,24 +125,29 @@ in the handout. Both pages:
 
 ## 4. Publish on GitHub Pages
 
-The handout asks for the link in the submission, so here is the shortest path:
+This submission is already deployed from the `main` branch of
+[`Tengdaiyuan/lab4`](https://github.com/Tengdaiyuan/lab4):
+
+```
+https://tengdaiyuan.github.io/lab4/
+```
+
+To publish the same folder in another repository:
 
 ```bash
 cd lab-xml-json
-git init
+git init -b main
 git add .
 git commit -m "XML & JSON lab"
-git branch -M main
 git remote add origin https://github.com/<your-user>/<your-repo>.git
 git push -u origin main
 ```
 
 Then, in the repository: **Settings → Pages → Build and deployment**
 
-* **Source: Deploy from a branch** → Branch `main`, folder `/ (root)` → **Save**, or
-* **Source: GitHub Actions** → the included `.github/workflows/pages.yml` runs on every push.
+* **Source: Deploy from a branch** → Branch `main`, folder `/ (root)` → **Save**.
 
-Wait for the deployment to finish and open:
+Wait for the deployment (usually a minute) and open:
 
 ```
 https://<your-user>.github.io/<your-repo>/
@@ -155,6 +159,9 @@ each lab page separately). If the repository is published as a *user* page
 
 > Keep `book.xml` and `userProfiles.json` in the same folder as the HTML pages — the pages
 > fetch them with relative paths.
+>
+> The repository deliberately contains no Pages *workflow*: with the Pages source set to a
+> branch, an Actions-based deploy on every push would only add failing runs.
 
 ## 5. Validation
 
@@ -208,3 +215,4 @@ successful `response.json()`.
   自检脚本：`node tools/selftest.mjs`。
 * 发布到 GitHub Pages 后，把仓库 Pages 地址（`https://<用户名>.github.io/<仓库名>/`）作为
   作业链接提交；两个实验页面分别是 `books.html` 与 `users.html`。
+* 本次已部署：<https://tengdaiyuan.github.io/lab4/>（仓库 `Tengdaiyuan/lab4`，main 分支根目录）。
